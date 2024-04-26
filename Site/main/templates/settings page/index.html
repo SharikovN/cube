@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings page</title>
+    <link rel="stylesheet" href='{% static "css/settings page/style2.css" %}'>
+</head>
+<body>
+    <div class="container">
+        <ul>
+            <li class="active"><a href="#"><ion-icon name="cube-outline"></ion-icon></a></li>
+            <li class="active" id='lamp' onclick="setLamp()"><a href="#"><ion-icon name="bulb-outline"></ion-icon></a></li>
+            <li class="active"><a href="#"><ion-icon name="heart-circle-outline"></ion-icon></a></li>
+            <li class="active"><a href="#"><ion-icon name="male-female-outline"></ion-icon></a></li>
+            <li class="active"><a href="#"><ion-icon name="sad-outline"></ion-icon></a></li>
+            <div id="marker" class="marker"></div>
+        </ul>
+        <!-- <ul>
+            <li class="active"><a href="#"><ion-icon name="wifi-outline"></ion-icon></a></li>
+            <li class="active"><a href="#"><ion-icon name="thermometer-outline"></ion-icon></a></li>
+            <li class="active"><a href="#"><ion-icon name="water-outline"></ion-icon></a></li>
+            <li class="active"><a href="#"><ion-icon name="tv-outline"></ion-icon></a></li>
+            <li class="active"><a href="#"><ion-icon name="partly-sunny-outline"></ion-icon></a></li>
+            <div id="marker" class="marker"></div>
+        </ul> -->
+    </div>
+ 
+
+</body>
+<script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"></script>
+
+
+<!-- <script>
+    let marker = document.querySelector('#marker');
+    let list = document.querySelectorAll('li');
+    let style = document.querySelector('#marker').style;
+    var t = "rgb(40, 220, 253)"
+    var r = "rgb(255,0,0)"
+    function moveIndicator(e) {
+        marker.style.left = e.offsetLeft+"px";
+        marker.style.width = e.offsetWidth+"px";
+        marker.style.top = e.offsetTop+"px";
+    }
+
+    list.forEach(Link => {
+        Link.addEventListener('click', (e) => {
+            moveIndicator(e.target);
+        })
+    })
+
+    function activeLink() {
+        list.forEach((item) =>
+        item.classList.remove('active'));
+        this.classList.add('active');
+    }
+
+    list.forEach((item) => {
+    style.setProperty('--background', t)
+    item.addEventListener('click', activeLink)});
+</script> -->
+
+<script>
+    let marker = document.querySelector('#marker');
+    let list = document.querySelectorAll('li');
+    let style = document.querySelector('#marker').style;
+    let lamp = document.querySelector('#lamp')
+    var t = "rgb(21, 255, 21)"
+    var bs = "0 0 15px rgb(21, 255, 21), 0 0 30px rgb(21, 255, 21), 0 0 45px rgb(21, 255, 21), 0 0 60px rgb(21, 255, 21)"
+    var bsr = "0 0 15px rgb(253, 40, 182), 0 0 30px rgb(253, 40, 182), 0 0 45px rgb(253, 40, 182), 0 0 60px rgb(253, 40, 182)"
+    function moveIndicator(e) {
+            marker.style.left = e.offsetLeft+"px";
+            marker.style.width = e.offsetWidth+"px";
+            marker.style.top = e.offsetTop+"px"; 
+    }
+
+
+    list.forEach(Link => {
+        Link.addEventListener('mouseover', (e) => {
+            moveIndicator(e.target);
+            setTimeout(() => {
+                if (Link.classList.contains('active')) {
+                style.setProperty('--background', t);
+                style.setProperty('--bs', bs);
+            }
+            else if(Link.classList.contains('inactive')) {
+                style.setProperty('--background', "rgb(253, 40, 182)");
+                style.setProperty('--bs', bsr);
+            }
+            }, 250);
+        })
+    })
+
+    function activeLink() {
+        list.forEach((item) =>
+        item.classList.remove('active'));
+        this.classList.add('active');
+    }
+
+    function isActive(e) {
+            if (this.classList.contains('active')) {
+                this.classList.remove('active');
+                this.classList.add('inactive');
+                style.setProperty('--background', "rgb(253, 40, 182)");
+                style.setProperty('--bs', bsr)
+            }
+            else {
+                this.classList.remove('inactive');
+                this.classList.add('active');
+                style.setProperty('--background', t);
+                style.setProperty('--bs', bs)
+            }
+    }
+
+    list.forEach((item) => {
+    item.addEventListener('click', isActive)});
+    // item.addEventListener('click', activeLink)});
+    function setLamp(){
+        if (lamp.classList.contains('active')) {
+            var url = 'http://192.168.1.71/on';
+        }
+        else {
+            var url = 'http://192.168.1.71/off';
+        }
+
+    // Опции запроса (в данном случае GET-запрос не требует тела или заголовков)
+    const options = {
+    method: 'GET'
+    };
+
+    // Отправка GET-запроса
+    fetch(url, options);
+    }
+</script>
+</html>

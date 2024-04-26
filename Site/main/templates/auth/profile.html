@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет</title>
+    <link rel="stylesheet" href='{% static "css/auth/style.css" %}'>
+</head>
+<body>
+    <section>
+        <div class="color"></div> 
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="container">
+            <header>
+                <a href="#" class="logo"></a>
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="/settings">Settings</a></li>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Home</a></li>
+                </ul>
+            </header>
+            <div class="content">
+                <h2>CUBe — личный кабинет</h2>
+                <p>{{ user.username }}, Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloremque quis reiciendis sit voluptas, laboriosam quaerat blanditiis ipsam vel sequi dicta perspiciatis corporis atque culpa! Minus dolores temporibus dolore quod modi?</p>
+                <a href="{% url 'logout' %}?next=/profile">Выйти</a>
+            </div>
+            <div class="imgbx">
+                <img src='{% static "images/character.png" %}'>
+            </div>
+        </div>
+    </section>
+        <!-- <button onclick="location.href=`{% url 'logout' %}?next=/profile`">Logout</button> -->
+</body>
+</html>
